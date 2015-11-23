@@ -43,8 +43,16 @@ RUN \
 
 RUN \
     wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && \
-    tar -xzf apache-maven-3.3.9-bin.tar.gz
+    tar -xzf apache-maven-3.3.9-bin.tar.gz && \
+    rm apache-maven-3.3.9-bin.tar.gz
 
 RUN \
     wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/ant/binaries/apache-ant-1.9.6-bin.tar.gz && \
-    tar -xzf apache-ant-1.9.6-bin.tar.gz
+    tar -xzf apache-ant-1.9.6-bin.tar.gz && \
+    rm apache-ant-1.9.6-bin.tar.gz
+
+RUN \
+    git clone https://gist.github.com/7872253.git && \
+    cp 7872253/.emacs ~ && \
+    rm -rf 7872253
+
