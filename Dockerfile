@@ -54,5 +54,6 @@ RUN \
 RUN \
     git clone https://gist.github.com/7872253.git && \
     cp 7872253/.emacs ~ && \
+    emacs --batch --eval '(load-file "~/.emacs")' && \
     rm -rf 7872253
 
