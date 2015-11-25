@@ -14,13 +14,16 @@ ENV ANT_HOME=/apache-ant-1.9.6
 ENV JAVA_HOME=/jdk1.8.0_66
 ENV JRE_HOME=$JAVA_HOME/jre
 
+# Fix X11 for Kdiff3
+ENV QT_X11_NO_MITSHM=1
+
 ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 
 RUN \
   apt-get update && \
   apt-get -y install \
           nodejs npm ruby ruby-compass python2.7 perl5 wget git screen nmap netcat mongodb-clients \
-          nvi emacs aptitude build-essential linux-kernel-headers apt-transport-https && \
+          nvi emacs aptitude build-essential linux-kernel-headers kdiff3 && \
   update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
 RUN \
