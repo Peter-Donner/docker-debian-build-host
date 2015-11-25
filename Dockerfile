@@ -18,13 +18,9 @@ ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 
 RUN \
   apt-get update && \
-  apt-get -y install apt-transport-https && \
-  apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
-  echo "deb https://apt.dockerproject.org/repo debian-wheezy main" >> /etc/apt/sources.list.d/docker.list && \
-  apt-get update && \
   apt-get -y install \
           nodejs npm ruby ruby-compass python2.7 perl5 wget git screen nmap netcat mongodb-clients \
-          docker-engine nvi emacs aptitude build-essential linux-kernel-headers && \
+          nvi emacs aptitude build-essential linux-kernel-headers apt-transport-https && \
   update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
 RUN \
