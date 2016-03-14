@@ -9,6 +9,7 @@ FROM debian:jessie
 MAINTAINER Peter Donner <peter@markup.at>
 
 ENV LEIN_ROOT=t
+ENV LEIN_SNAPSHOTS_IN_RELEASE=t
 ENV MAVEN_HOME=/apache-maven-3.3.9
 ENV ANT_HOME=/apache-ant-1.9.6
 ENV JAVA_HOME=/jdk1.8.0_66
@@ -27,7 +28,7 @@ RUN \
   apt-get update && \
   apt-get -y install \
           nodejs npm ruby ruby-compass python2.7 perl5 wget git screen nmap netcat mongodb-clients \
-          nvi emacs aptitude build-essential linux-kernel-headers kdiff3 docker-engine \
+          mongodb-server nvi net-tools emacs aptitude build-essential linux-kernel-headers kdiff3 docker-engine \
           ca-certificates curl lxc iptables && \
   update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
