@@ -29,6 +29,7 @@ RUN \
   apt-get -y install \
           nodejs npm ruby ruby-compass python2.7 perl5 wget git screen nmap netcat mongodb-clients \
           mongodb-server nvi net-tools emacs aptitude build-essential linux-kernel-headers kdiff3 docker-engine \
+  	  rlwrap zsh \
           ca-certificates curl lxc iptables && \
   update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
@@ -37,6 +38,9 @@ RUN \
 
 RUN \
   npm install -g grunt-cli
+
+RUN \
+  npm install -g bower
 
 RUN \
   wget --no-cookies --no-check-certificate \
