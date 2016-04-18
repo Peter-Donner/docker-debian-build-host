@@ -63,9 +63,9 @@ RUN \
     rm apache-maven-3.3.9-bin.tar.gz
 
 RUN \
-    wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/ant/binaries/apache-ant-1.9.6-bin.tar.gz && \
-    tar -xzf apache-ant-1.9.6-bin.tar.gz && \
-    rm apache-ant-1.9.6-bin.tar.gz
+    wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/ant/binaries/apache-ant-1.9.7-bin.tar.gz && \
+    tar -xzf apache-ant-1.9.7-bin.tar.gz && \
+    rm apache-ant-1.9.7-bin.tar.gz
 
 RUN \
     git clone https://gist.github.com/7872253.git && \
