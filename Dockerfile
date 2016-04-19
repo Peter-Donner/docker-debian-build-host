@@ -21,17 +21,94 @@ ENV QT_X11_NO_MITSHM=1
 ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 
 RUN \
-  apt-get update && \
-  apt-get -y install apt-transport-https && \
-  apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
+  apt-get update
+
+RUN \
+  apt-get -y install apt-transport-https
+
+RUN \
+  apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
+RUN \
   echo "deb https://apt.dockerproject.org/repo debian-jessie main" >> /etc/apt/sources.list.d/docker.list && \
-  apt-get update && \
-  apt-get -y install \
-          nodejs npm ruby ruby-compass python2.7 perl5 wget git screen nmap netcat mongodb-clients \
-          mongodb-server nvi net-tools emacs aptitude build-essential linux-kernel-headers kdiff3 docker-engine \
-  	  rlwrap zsh \
-          ca-certificates curl lxc iptables && \
-  update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+  apt-get update
+
+RUN \
+   apt-get -y install nodejs
+   
+RUN \
+   apt-get -y install npm
+
+RUN \
+   apt-get -y install ruby
+
+RUN \
+   apt-get -y install ruby-compass
+
+RUN \
+   apt-get -y install python2.7
+
+RUN \
+   apt-get -y install perl5
+
+RUN \
+   apt-get -y install wget
+
+RUN \
+   apt-get -y install git
+
+RUN \
+   apt-get -y install screen
+
+RUN \
+   apt-get -y install nmap
+
+RUN \
+   apt-get -y install netcat
+
+RUN \
+   apt-get -y install mongodb-clients
+
+RUN \
+   apt-get -y install mongodb-server
+
+RUN \
+   apt-get -y install nvi
+
+RUN \
+   apt-get -y install net-tools
+
+RUN \
+   apt-get -y install emacs
+
+RUN \
+   apt-get -y install build-essential
+
+RUN \
+   apt-get -y install linux-kernel-headers
+
+RUN \
+   apt-get -y install kdiff3
+
+RUN \
+   apt-get -y install docker-engine
+
+RUN \
+   apt-get -y install rlwrap zsh
+
+RUN \
+   apt-get -y install ca-certificates
+
+RUN \
+   apt-get -y install curl
+
+RUN \
+   apt-get -y install lxc
+
+RUN \
+   apt-get -y install iptables
+
+RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
 RUN \
   npm install -g gulp
