@@ -15,9 +15,6 @@ ENV ANT_HOME=/apache-ant-1.9.7
 ENV JAVA_HOME=/jdk1.8.0_92
 ENV JRE_HOME=$JAVA_HOME/jre
 
-# Fix X11 for Kdiff3
-ENV QT_X11_NO_MITSHM=1
-
 ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 
 RUN apt-get update
@@ -47,7 +44,6 @@ RUN apt-get -y install net-tools
 RUN apt-get -y install emacs
 RUN apt-get -y install build-essential
 RUN apt-get -y install linux-kernel-headers
-RUN apt-get -y install kdiff3
 RUN apt-get -y install docker-engine
 RUN apt-get -y install rlwrap
 RUN apt-get -y install zsh
@@ -95,5 +91,8 @@ RUN git clone https://github.com/jpetazzo/dind && \
 
 RUN curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
     chmod a+x /usr/local/bin/docker-compose
+
+ADD startup.sh /root/startup.sh
+RUN chmod +x /root/startup.sh
 
 VOLUME /var/lib/docker

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+docker run --privileged \
+       --rm \
+       -P=true \
+       -p 8000:8000 \
+       -p 3449:3449 \
+       -e HOST_GID=`id -g` \
+       -e HOST_UID=`id -u` \
+       -e HOST_USER=$USER \
+       -v /home/$USER/src:/home/$USER/src \
+       -v /home/$USER/org:/home/$USER/org \
+       -v /home/$USER/.gitconfig:/home/$USER/.gitconfig \
+       -v /home/$USER/.m2:/home/$USER/.m2 \
+       -v /tmp/.X11-unix:/tmp/.X11-unix \
+       -e DISPLAY=:0 \
+       -it buildhost sh /root/startup.sh
