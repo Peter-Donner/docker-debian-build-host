@@ -92,6 +92,11 @@ RUN git clone https://github.com/jpetazzo/dind && \
 RUN curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
     chmod a+x /usr/local/bin/docker-compose
 
+RUN git clone https://github.com/robbyrussell/oh-my-zsh.git
+RUN mv oh-my-zsh /usr/local/share
+
+ADD zshrc /etc/zsh/zshrc
+
 ADD startup.sh /root/startup.sh
 RUN chmod +x /root/startup.sh
 
