@@ -12,6 +12,6 @@ docker run --privileged \
        -v /home/$USER/org:/home/$USER/org \
        -v /home/$USER/.gitconfig:/home/$USER/.gitconfig \
        -v /home/$USER/.m2:/home/$USER/.m2 \
-       -v /tmp/.X11-unix:/tmp/.X11-unix \
+       -v /tmp:/tmp \
        -e DISPLAY=:0 \
        -it buildhost sh /root/startup.sh

@@ -51,6 +51,7 @@ RUN apt-get -y install ca-certificates
 RUN apt-get -y install curl
 RUN apt-get -y install lxc
 RUN apt-get -y install iptables
+RUN apt-get -y install manpages man-db
 
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
@@ -84,14 +85,6 @@ RUN git clone https://gist.github.com/7872253.git && \
     emacs --batch --eval '(load-file "~/.emacs")' && \
     rm -rf 7872253
 
-RUN git clone https://github.com/jpetazzo/dind && \
-    cp dind/wrapdocker /usr/local/bin && \
-    chmod a+x /usr/local/bin && \
-    rm -rf dind
-
-RUN curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
-    chmod a+x /usr/local/bin/docker-compose
-
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git
 RUN mv oh-my-zsh /usr/local/share
 
@@ -99,5 +92,3 @@ ADD zshrc /etc/zsh/zshrc
 
 ADD startup.sh /root/startup.sh
 RUN chmod +x /root/startup.sh
-
-VOLUME /var/lib/docker
