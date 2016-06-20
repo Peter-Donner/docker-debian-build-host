@@ -7,3 +7,4 @@ ZSH_THEME="ys"
 plugins=(lein debian git git-extras colored-man zsh_reload dirhistory)
 
 source $ZSH/oh-my-zsh.sh
+export QT_X11_NO_MITSHM=1

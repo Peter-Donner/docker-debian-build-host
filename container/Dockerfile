@@ -52,6 +52,7 @@ RUN apt-get -y install curl
 RUN apt-get -y install lxc
 RUN apt-get -y install iptables
 RUN apt-get -y install manpages man-db
+RUN apt-get -y install kdiff3
 
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
