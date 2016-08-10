@@ -53,6 +53,7 @@ RUN apt-get -y install lxc
 RUN apt-get -y install iptables
 RUN apt-get -y install manpages man-db
 RUN apt-get -y install kdiff3
+RUN apt-get -y install exiftool
 
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
@@ -62,11 +63,11 @@ RUN npm install -g bower
 
 RUN wget --no-cookies --no-check-certificate \
        --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" \
-       "http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jdk-8u92-linux-x64.tar.gz" && \
-    tar -xzf jdk-8u92-linux-x64.tar.gz && \
-    update-alternatives --install /usr/bin/java java /jdk1.8.0_92/bin/java 10 && \
-    update-alternatives --install /usr/bin/javac javac /jdk1.8.0_92/bin/javac 10 && \
-    rm jdk-8u92-linux-x64.tar.gz
+       "http://download.oracle.com/otn-pub/java/jdk/8u102-b14/jdk-8u102-linux-x64.tar.gz" && \
+    tar -xzf jdk-8u102-linux-x64.tar.gz && \
+    update-alternatives --install /usr/bin/java java /jdk1.8.0_102/bin/java 10 && \
+    update-alternatives --install /usr/bin/javac javac /jdk1.8.0_102/bin/javac 10 && \
+    rm jdk-8u102-linux-x64.tar.gz
 
 RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod a+x lein && \
