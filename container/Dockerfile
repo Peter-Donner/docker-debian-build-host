@@ -80,9 +80,9 @@ RUN wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/ant/binarie
     tar -xzf apache-ant-1.9.7-bin.tar.gz && \
     rm apache-ant-1.9.7-bin.tar.gz
 
-RUN git clone https://gist.github.com/7872253.git && \
-    cp 7872253/.emacs ~ && \
-    emacs --batch --eval '(load-file "~/.emacs")' && \
+ADD .emacs /root/.emacs
+
+RUN emacs --batch --eval '(load-file "~/.emacs")' && \
     rm -rf 7872253
 
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git
