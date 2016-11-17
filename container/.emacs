@@ -46,7 +46,8 @@
                       sass-mode
                       auto-complete
                       yasnippet
-                      typescript))
+                      typescript
+                      rainbow-mode))
  
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -70,7 +71,9 @@
 
 ;;; SASS
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . sass-mode))
- 
+(add-hook 'sass-mode-hook (lambda () (rainbow-mode 1)))
+
+
 ;;; ERC
 (setq erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
  
@@ -124,13 +127,4 @@ your recently and most frequently used commands.")
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (monokai)))
- '(custom-safe-themes
-   (quote
-    ("a800120841da457aa2f86b98fb9fd8df8ba682cebde033d7dbf8077c1b7d677a" "1e3b2c9e7e84bb886739604eae91a9afbdfb2e269936ec5dd4a9d3b7a943af7f" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+ '(custom-enabled-themes (quote (monokai))))
