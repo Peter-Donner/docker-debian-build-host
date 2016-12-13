@@ -53,6 +53,9 @@
   (when (not (package-installed-p p))
     (package-install p)))
  
+;;; Window switching
+(windmove-default-keybindings)
+
 ;;; Auto Complete
 (require 'auto-complete-config)
 (ac-config-default)
