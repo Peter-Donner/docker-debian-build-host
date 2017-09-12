@@ -11,7 +11,7 @@ MAINTAINER Peter Donner <peter@markup.at>
 ENV LEIN_ROOT=t
 ENV LEIN_SNAPSHOTS_IN_RELEASE=t
 ENV MAVEN_HOME=/apache-maven-3.3.9
-ENV ANT_HOME=/apache-ant-1.9.7
+ENV ANT_HOME=/apache-ant-1.10.1
 
 ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 
@@ -61,11 +61,11 @@ RUN npm install -g bower
 
 RUN wget --no-cookies --no-check-certificate \
        --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" \
-       "http://download.oracle.com/otn-pub/java/jdk/8u102-b14/jdk-8u102-linux-x64.tar.gz" && \
-    tar -xzf jdk-8u102-linux-x64.tar.gz && \
-    update-alternatives --install /usr/bin/java java /jdk1.8.0_102/bin/java 10 && \
-    update-alternatives --install /usr/bin/javac javac /jdk1.8.0_102/bin/javac 10 && \
-    rm jdk-8u102-linux-x64.tar.gz
+       "http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz" && \
+    tar -xzf jdk-8u144-linux-x64.tar.gz && \
+    update-alternatives --install /usr/bin/java java /jdk1.8.0_144/bin/java 10 && \
+    update-alternatives --install /usr/bin/javac javac /jdk1.8.0_144/bin/javac 10 && \
+    rm jdk-8u144-linux-x64.tar.gz
 
 RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod a+x lein && \
@@ -76,9 +76,9 @@ RUN wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/maven/maven
     tar -xzf apache-maven-3.3.9-bin.tar.gz && \
     rm apache-maven-3.3.9-bin.tar.gz
 
-RUN wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/ant/binaries/apache-ant-1.9.7-bin.tar.gz && \
-    tar -xzf apache-ant-1.9.7-bin.tar.gz && \
-    rm apache-ant-1.9.7-bin.tar.gz
+RUN wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz && \
+    tar -xzf apache-ant-1.10.1-bin.tar.gz && \
+    rm apache-ant-1.10.1-bin.tar.gz
 
 ADD .emacs /root/.emacs
 
