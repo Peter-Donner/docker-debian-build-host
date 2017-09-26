@@ -5,7 +5,7 @@
 # Build Tools/Package Managers: Maven, Ant, Leiningen, Node Package Manager, Gulp, Grunt
 # Tools: MongoDB, Emacs, Git
 
-FROM debian:jessie
+FROM debian:stretch
 MAINTAINER Peter Donner <peter@markup.at>
 
 ENV LEIN_ROOT=t
@@ -19,17 +19,10 @@ RUN apt-get update
 
 RUN apt-get -y install apt-transport-https
 
-RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-
-RUN echo "deb https://apt.dockerproject.org/repo debian-jessie main" >> /etc/apt/sources.list.d/docker.list && \
-    apt-get update
-
-RUN apt-get -y install nodejs
-RUN apt-get -y install npm
 RUN apt-get -y install ruby
 RUN apt-get -y install ruby-compass
 RUN apt-get -y install python2.7
-RUN apt-get -y install perl5
+RUN apt-get -y install perl6
 RUN apt-get -y install wget
 RUN apt-get -y install git
 RUN apt-get -y install screen
@@ -42,7 +35,6 @@ RUN apt-get -y install net-tools
 RUN apt-get -y install emacs
 RUN apt-get -y install build-essential
 RUN apt-get -y install linux-kernel-headers
-RUN apt-get -y install docker-engine
 RUN apt-get -y install rlwrap
 RUN apt-get -y install zsh
 RUN apt-get -y install ca-certificates
@@ -53,11 +45,14 @@ RUN apt-get -y install manpages man-db
 RUN apt-get -y install kdiff3
 RUN apt-get -y install exiftool
 
-RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN apt install nodejs
 
 RUN npm install -g gulp
 RUN npm install -g grunt-cli
 RUN npm install -g bower
+RUN npm install -g purescript
+RUN npm install -g pulp
 
 RUN wget --no-cookies --no-check-certificate \
        --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" \
@@ -72,11 +67,11 @@ RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
     mv lein /usr/local/bin && \
     /usr/local/bin/lein
 
-RUN wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz && \
-    tar -xzf apache-maven-3.3.9-bin.tar.gz && \
-    rm apache-maven-3.3.9-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz && \
+    tar -xzf apache-maven-3.5.0-bin.tar.gz && \
+    rm apache-maven-3.5.0-bin.tar.gz
 
-RUN wget http://gd.tuwien.ac.at/pub/infosys/servers/http/apache/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz && \
+RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz && \
     tar -xzf apache-ant-1.10.1-bin.tar.gz && \
     rm apache-ant-1.10.1-bin.tar.gz
 

@@ -20,14 +20,12 @@
 (menu-bar-mode -1)
 (column-number-mode 1)
 (setq-default indent-tabs-mode nil)
- 
+
 (require 'package)
 (add-to-list 'package-archives
              '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 (when (not (package-installed-p 'better-defaults))
@@ -46,8 +44,9 @@
                       sass-mode
                       auto-complete
                       yasnippet
-                      typescript
-                      rainbow-mode))
+                      typescript-mode
+                      rainbow-mode
+                      purescript-mode))
  
 (dolist (p my-packages)
   (when (not (package-installed-p p))
