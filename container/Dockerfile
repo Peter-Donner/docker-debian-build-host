@@ -44,6 +44,7 @@ RUN apt-get -y install iptables
 RUN apt-get -y install manpages man-db
 RUN apt-get -y install kdiff3
 RUN apt-get -y install exiftool
+RUN apt-get -y install haskell-platform
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt install nodejs
