@@ -70,6 +70,8 @@
                                (cljr-add-keybindings-with-prefix "C-c C-m")))
 (add-hook 'cider-repl-mode-hook (lambda ()
                                (eldoc-mode 1)))
+;;; set host to localhost instead of :: to fix IPv6 issues with OpenJDK
+(setq cider-lein-parameters "repl :headless :host localhost")
 
 ;;; SASS
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . sass-mode))
@@ -85,7 +87,17 @@
 ;; TypeScript
 (setq typescript-indent-level 2
       typescript-expr-indent-offset 2)
- 
+
+;; PureScript mode
+(require 'purescript-mode)
+;(require 'psc-ide)
+(add-hook 'purescript-mode-hook
+  (lambda ()
+;    (psc-ide-mode)
+;    (company-mode)
+                                        ;    (flycheck-mode)
+    (turn-on-purescript-indent)
+))
 ;;; org mode
 (setq org-directory "~/org"
       org-mobile-files '("~/org/borland.org" "~/org/borland-timesheet.org")

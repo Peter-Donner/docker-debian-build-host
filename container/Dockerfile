@@ -45,7 +45,7 @@ RUN apt-get -y install manpages man-db
 RUN apt-get -y install kdiff3
 RUN apt-get -y install exiftool
 RUN apt-get -y install haskell-platform
-
+RUN apt-get -y install openjdk-8-jdk
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt install nodejs
 
@@ -54,14 +54,6 @@ RUN npm install -g grunt-cli
 RUN npm install -g bower
 RUN npm install -g purescript
 RUN npm install -g pulp
-
-RUN wget --no-cookies --no-check-certificate \
-       --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" \
-       "http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz" && \
-    tar -xzf jdk-8u144-linux-x64.tar.gz && \
-    update-alternatives --install /usr/bin/java java /jdk1.8.0_144/bin/java 10 && \
-    update-alternatives --install /usr/bin/javac javac /jdk1.8.0_144/bin/javac 10 && \
-    rm jdk-8u144-linux-x64.tar.gz
 
 RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod a+x lein && \
@@ -78,8 +70,7 @@ RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz
 
 ADD .emacs /root/.emacs
 
-RUN emacs --batch --eval '(load-file "~/.emacs")' && \
-    rm -rf 7872253
+RUN emacs --batch --eval '(load-file "~/.emacs")'
 
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git
 RUN mv oh-my-zsh /usr/local/share
