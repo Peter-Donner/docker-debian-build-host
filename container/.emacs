@@ -18,6 +18,7 @@
  
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(setq blink-cursor-mode -1)
 (column-number-mode 1)
 (setq-default indent-tabs-mode nil)
 
@@ -46,7 +47,11 @@
                       yasnippet
                       typescript-mode
                       rainbow-mode
-                      purescript-mode))
+                      purescript-mode
+                      parinfer
+                      lispy
+                      lispyscript-mode
+                      use-package))
  
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -68,8 +73,8 @@
                                (yas-minor-mode)
                                (paredit-mode)
                                (cljr-add-keybindings-with-prefix "C-c C-m")))
-(add-hook 'cider-repl-mode-hook (lambda ()
-                               (eldoc-mode 1)))
+(add-hook 'cider-repl-mode-hook (lambda ())
+                               (eldoc-mode 1))
 ;;; set host to localhost instead of :: to fix IPv6 issues with OpenJDK
 (setq cider-lein-parameters "repl :headless :host localhost")
 
@@ -96,8 +101,29 @@
 ;    (psc-ide-mode)
 ;    (company-mode)
                                         ;    (flycheck-mode)
-    (turn-on-purescript-indent)
-))
+    (turn-on-purescript-indent)))
+    
+
+(use-package parinfer
+  :ensure t
+  :bind
+  (("C-," . parinfer-toggle-mode))
+  :init
+  (progn
+    (setq parinfer-extensions
+          '(defaults       ; should be included.
+            pretty-parens  ; different paren styles for different modes.
+            evil           ; If you use Evil.
+            lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
+            paredit        ; Introduce some paredit commands.
+            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+            smart-yank))   ; Yank behavior depend on mode.
+    (add-hook 'clojure-mode-hook #'parinfer-mode)
+    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'scheme-mode-hook #'parinfer-mode)
+    (add-hook 'lisp-mode-hook #'parinfer-mode)))
+
 ;;; org mode
 (setq org-directory "~/org"
       org-mobile-files '("~/org/borland.org" "~/org/borland-timesheet.org")
