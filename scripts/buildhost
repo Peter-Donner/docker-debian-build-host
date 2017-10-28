@@ -5,6 +5,7 @@ docker run --privileged \
        -P=true \
        -p 8000:8000 \
        -p 3449:3449 \
+       -p 10555:10555 \
        -e HOST_GID=`id -g` \
        -e HOST_UID=`id -u` \
        -e HOST_USER=$USER \

@@ -20,7 +20,7 @@ RUN apt-get update
 RUN apt-get -y install apt-transport-https
 
 RUN apt-get -y install ruby
-RUN apt-get -y install ruby-compass
+RUN apt-get -y install ruby-dev
 RUN apt-get -y install python2.7
 RUN apt-get -y install perl6
 RUN apt-get -y install wget
@@ -32,8 +32,9 @@ RUN apt-get -y install mongodb-clients
 RUN apt-get -y install mongodb-server
 RUN apt-get -y install nvi
 RUN apt-get -y install net-tools
-RUN apt-get -y install emacs
 RUN apt-get -y install build-essential
+RUN apt-get -y install emacs25-common
+RUN apt-get -y install emacs25
 RUN apt-get -y install linux-kernel-headers
 RUN apt-get -y install rlwrap
 RUN apt-get -y install zsh
@@ -48,6 +49,8 @@ RUN apt-get -y install haskell-platform
 RUN apt-get -y install openjdk-8-jdk
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt install nodejs
+
+RUN gem install sass --no-user-install
 
 RUN npm install -g gulp
 RUN npm install -g grunt-cli
