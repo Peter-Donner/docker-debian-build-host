@@ -2,7 +2,7 @@
 ZSH=/usr/local/share/oh-my-zsh
 
 # Theme
-ZSH_THEME="ys"
+ZSH_THEME="lambda"
 
 plugins=(lein debian git git-extras colored-man zsh_reload dirhistory)
 

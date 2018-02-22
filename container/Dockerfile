@@ -25,7 +25,7 @@ RUN apt-get -y install python2.7
 RUN apt-get -y install perl6
 RUN apt-get -y install wget
 RUN apt-get -y install git
-RUN apt-get -y install screen
+RUN apt-get -y install tmux
 RUN apt-get -y install nmap
 RUN apt-get -y install netcat
 RUN apt-get -y install mongodb-clients
@@ -46,30 +46,37 @@ RUN apt-get -y install manpages man-db
 RUN apt-get -y install kdiff3
 RUN apt-get -y install exiftool
 RUN apt-get -y install haskell-platform
+RUN apt-get -y install erlang
 RUN apt-get -y install openjdk-8-jdk
+RUN apt-get -y install locales
+RUN apt-get -y install locales-all
+
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt install nodejs
 
 RUN gem install sass --no-user-install
 
 RUN npm install -g gulp
-RUN npm install -g grunt-cli
-RUN npm install -g bower
-RUN npm install -g purescript
-RUN npm install -g pulp
 
 RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod a+x lein && \
     mv lein /usr/local/bin && \
     /usr/local/bin/lein
 
-RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz && \
-    tar -xzf apache-maven-3.5.0-bin.tar.gz && \
-    rm apache-maven-3.5.0-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz && \
+    tar -xzf apache-maven-3.5.2-bin.tar.gz && \
+    rm apache-maven-3.5.2-bin.tar.gz
 
-RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.1-bin.tar.gz && \
-    tar -xzf apache-ant-1.10.1-bin.tar.gz && \
-    rm apache-ant-1.10.1-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.gz && \
+    tar -xzf apache-ant-1.10.2-bin.tar.gz && \
+    rm apache-ant-1.10.2-bin.tar.gz
+
+RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
 
 ADD .emacs /root/.emacs
 

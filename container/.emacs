@@ -21,6 +21,7 @@
 (setq blink-cursor-mode -1)
 (column-number-mode 1)
 (setq-default indent-tabs-mode nil)
+(setq make-backup-files nil)
 
 (require 'package)
 (add-to-list 'package-archives

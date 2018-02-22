@@ -14,6 +14,7 @@ docker run --privileged \
        -v /home/$USER/src:/home/$USER/src \
        -v /home/$USER/org:/home/$USER/org \
        -v /home/$USER/.gitconfig:/home/$USER/.gitconfig \
+       -v /home/$USER/.boot:/home/$USER/.boot \
        -v /home/$USER/.m2:/home/$USER/.m2 \
        -v /tmp/.X11-unix:/tmp/.X11-unix \
        -e DISPLAY=:0 \
