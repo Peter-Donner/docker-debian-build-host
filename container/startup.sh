@@ -6,6 +6,7 @@ echo "$HOST_USER:pw" | chpasswd
 mkdir /home/$HOST_USER/.lein
 cp -r /root/.lein/* /home/$HOST_USER/.lein/
 
+mkdir /home/$HOST_USER/.saves
 mkdir /home/$HOST_USER/.emacs.d
 cp -r /root/.emacs.d/* /home/$HOST_USER/.emacs.d/
 cp /root/.emacs /home/$HOST_USER/.emacs
