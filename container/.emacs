@@ -21,7 +21,6 @@
 (setq blink-cursor-mode -1)
 (column-number-mode 1)
 (setq-default indent-tabs-mode nil)
-(setq make-backup-files nil)
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message ";; Emacs")
 
