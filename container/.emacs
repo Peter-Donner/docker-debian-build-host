@@ -44,7 +44,7 @@
 (when (not (package-installed-p 'better-defaults))
     (package-refresh-contents))
 
-(defvar my-packages '(ido-ubiquitous
+(defvar my-packages '(;ido-ubiquitous
                       smex
                       better-defaults
                       magit

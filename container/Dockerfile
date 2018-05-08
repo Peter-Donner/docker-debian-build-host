@@ -10,8 +10,8 @@ MAINTAINER Peter Donner <peter@markup.at>
 
 ENV LEIN_ROOT=t
 ENV LEIN_SNAPSHOTS_IN_RELEASE=t
-ENV MAVEN_HOME=/apache-maven-3.3.9
-ENV ANT_HOME=/apache-ant-1.10.1
+ENV MAVEN_HOME=/apache-maven-3.5.3
+ENV ANT_HOME=/apache-ant-1.10.3
 
 ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 
@@ -68,13 +68,13 @@ RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
     mv lein /usr/local/bin && \
     /usr/local/bin/lein
 
-RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz && \
-    tar -xzf apache-maven-3.5.2-bin.tar.gz && \
-    rm apache-maven-3.5.2-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.tar.gz && \
+    tar -xzf apache-maven-3.5.3-bin.tar.gz && \
+    rm apache-maven-3.5.3-bin.tar.gz
 
-RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.gz && \
-    tar -xzf apache-ant-1.10.2-bin.tar.gz && \
-    rm apache-ant-1.10.2-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.3-bin.tar.gz && \
+    tar -xzf apache-ant-1.10.3-bin.tar.gz && \
+    rm apache-ant-1.10.3-bin.tar.gz
 
 RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
 
