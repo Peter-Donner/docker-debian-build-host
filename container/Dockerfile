@@ -50,6 +50,8 @@ RUN apt-get -y install erlang
 RUN apt-get -y install openjdk-8-jdk
 RUN apt-get -y install locales
 RUN apt-get -y install locales-all
+RUN apt-get -y install gcc-avr
+RUN apt-get -y install avr-libc
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
