@@ -2,7 +2,7 @@
 # ==========================================
 #
 # Supported Languages: Oracle Java, Clojure, JavaScript (node.js), Ruby (with Compass), Python, Perl
-# Build Tools/Package Managers: Maven, Ant, Leiningen, Node Package Manager, Gulp, Grunt
+# Build Tools/Package Managers: Maven, Ant, Leiningen, Node Package Manager
 # Tools: MongoDB, Emacs, Git
 
 FROM debian:stretch
@@ -52,6 +52,7 @@ RUN apt-get -y install locales
 RUN apt-get -y install locales-all
 RUN apt-get -y install gcc-avr
 RUN apt-get -y install avr-libc
+RUN apt-get -y install php
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -62,8 +63,6 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt install nodejs
 
 RUN gem install sass --no-user-install
-
-RUN npm install -g gulp
 
 RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod a+x lein && \
