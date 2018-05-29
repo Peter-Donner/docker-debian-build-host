@@ -51,6 +51,8 @@
                       paredit
                       clojure-mode
                       clj-refactor
+                      elixir-mode
+                      erlang
                       haml-mode
                       haskell-mode
                       monokai-theme

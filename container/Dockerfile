@@ -53,6 +53,7 @@ RUN apt-get -y install locales-all
 RUN apt-get -y install gcc-avr
 RUN apt-get -y install avr-libc
 RUN apt-get -y install php
+RUN apt-get -y install elixir
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
