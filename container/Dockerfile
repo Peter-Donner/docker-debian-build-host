@@ -10,8 +10,8 @@ MAINTAINER Peter Donner <peter@markup.at>
 
 ENV LEIN_ROOT=t
 ENV LEIN_SNAPSHOTS_IN_RELEASE=t
-ENV MAVEN_HOME=/apache-maven-3.5.3
-ENV ANT_HOME=/apache-ant-1.10.3
+ENV MAVEN_HOME=/apache-maven-3.5.4
+ENV ANT_HOME=/apache-ant-1.10.4
 
 ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 
@@ -54,13 +54,15 @@ RUN apt-get -y install gcc-avr
 RUN apt-get -y install avr-libc
 RUN apt-get -y install php
 RUN apt-get -y install elixir
+RUN apt-get -y install php-mysql
+RUN apt-get -y install mariadb-server
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt install nodejs
 
 RUN gem install sass --no-user-install
@@ -70,13 +72,13 @@ RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
     mv lein /usr/local/bin && \
     /usr/local/bin/lein
 
-RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.tar.gz && \
-    tar -xzf apache-maven-3.5.3-bin.tar.gz && \
-    rm apache-maven-3.5.3-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz && \
+    tar -xzf apache-maven-3.5.4-bin.tar.gz && \
+    rm apache-maven-3.5.4-bin.tar.gz
 
-RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.3-bin.tar.gz && \
-    tar -xzf apache-ant-1.10.3-bin.tar.gz && \
-    rm apache-ant-1.10.3-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.4-bin.tar.gz && \
+    tar -xzf apache-ant-1.10.4-bin.tar.gz && \
+    rm apache-ant-1.10.4-bin.tar.gz
 
 RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
 
@@ -86,6 +88,8 @@ RUN emacs --batch --eval '(load-file "~/.emacs")'
 
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git
 RUN mv oh-my-zsh /usr/local/share
+
+RUN npm install -g @angular/cli
 
 ADD zshrc /etc/zsh/zshrc
 
