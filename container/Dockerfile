@@ -56,6 +56,7 @@ RUN apt-get -y install php
 RUN apt-get -y install elixir
 RUN apt-get -y install php-mysql
 RUN apt-get -y install mariadb-server
+RUN apt-get -y install libusb-dev
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
