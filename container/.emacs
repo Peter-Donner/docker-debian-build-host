@@ -63,8 +63,6 @@
                       rainbow-mode
                       purescript-mode
                       parinfer
-                      lispy
-                      lispyscript-mode
                       use-package))
  
 (dolist (p my-packages)
@@ -128,7 +126,7 @@
           '(defaults       ; should be included.
             pretty-parens  ; different paren styles for different modes.
             evil           ; If you use Evil.
-            lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
+            ;;lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
             paredit        ; Introduce some paredit commands.
             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
             smart-yank))   ; Yank behavior depend on mode.

@@ -83,16 +83,16 @@ RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.5-bin.tar.gz
 
 RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
 
-ADD .emacs /root/.emacs
-
-RUN emacs --batch --eval '(load-file "~/.emacs")'
-
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git
 RUN mv oh-my-zsh /usr/local/share
 
+ADD zshrc /etc/zsh/zshrc
+
 RUN npm install -g @angular/cli
 
-ADD zshrc /etc/zsh/zshrc
+ADD .emacs /root/.emacs
+
+RUN emacs --batch --eval '(load-file "~/.emacs")'
 
 ADD startup.sh /root/startup.sh
 RUN chmod +x /root/startup.sh
