@@ -9,6 +9,8 @@ cp -r /root/.lein/* /home/$HOST_USER/.lein/
 mkdir /home/$HOST_USER/.saves
 mkdir /home/$HOST_USER/.emacs.d
 cp -r /root/.emacs.d/* /home/$HOST_USER/.emacs.d/
+cp -r /root/.config /home/$HOST_USER/
+cp -r /root/.vscode /home/$HOST_USER/
 cp /root/.emacs /home/$HOST_USER/.emacs
 cat /etc/zsh/zshrc > /home/$HOST_USER/.zshrc
 

@@ -57,6 +57,8 @@ RUN apt-get -y install elixir
 RUN apt-get -y install php-mysql
 RUN apt-get -y install mariadb-server
 RUN apt-get -y install libusb-dev
+RUN apt-get -y install libxkbfile1 # Visual Studio Code
+RUN apt-get -y install libsecret-1-0 # Visual Studio Code
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -68,18 +70,29 @@ RUN apt install nodejs
 
 RUN gem install sass --no-user-install
 
+# Visual Studio Code
+RUN wget https://go.microsoft.com/fwlink/?LinkID=760868
+RUN mv index.html?LinkID=760868 vscode.deb
+RUN dpkg -i vscode.deb
+RUN rm vscode.deb
+RUN code --install-extension betterthantomorrow.calva@2.0.52 --user-data-dir /root/.config/Code
+
 RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
     chmod a+x lein && \
     mv lein /usr/local/bin && \
     /usr/local/bin/lein
 
-RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz && \
-    tar -xzf apache-maven-3.6.0-bin.tar.gz && \
-    rm apache-maven-3.6.0-bin.tar.gz
+RUN curl -O https://download.clojure.org/install/linux-install-1.10.1.469.sh
+RUN chmod +x linux-install-1.10.1.469.sh
+RUN bash ./linux-install-1.10.1.469.sh
 
-RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.5-bin.tar.gz && \
-    tar -xzf apache-ant-1.10.5-bin.tar.gz && \
-    rm apache-ant-1.10.5-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz && \
+    tar -xzf apache-maven-3.6.2-bin.tar.gz && \
+    rm apache-maven-3.6.2-bin.tar.gz
+
+RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.7-bin.tar.gz && \
+    tar -xzf apache-ant-1.10.7-bin.tar.gz && \
+    rm apache-ant-1.10.7-bin.tar.gz
 
 RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
 
