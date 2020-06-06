@@ -10,12 +10,16 @@ docker run --privileged \
        -e HOST_GID=`id -g` \
        -e HOST_UID=`id -u` \
        -e HOST_USER=$USER \
+       -e HOST_DOCKER_GID=`getent group docker | awk -F: '{printf "%d", $3}'` \
        -v /home/$USER/.ssh:/home/$USER/.ssh \
        -v /home/$USER/src:/home/$USER/src \
        -v /home/$USER/org:/home/$USER/org \
        -v /home/$USER/.gitconfig:/home/$USER/.gitconfig \
        -v /home/$USER/.boot:/home/$USER/.boot \
        -v /home/$USER/.m2:/home/$USER/.m2 \
+       -v /home/$USER/.emacs.d:/home/$USER/.emacs.d \
+       -v /home/$USER/.spacemacs:/home/$USER/.spacemacs \
        -v /tmp/.X11-unix:/tmp/.X11-unix \
+       -v /var/run/docker.sock:/var/run/docker.sock \
        -e DISPLAY=:0 \
        -it buildhost sh /root/startup.sh
