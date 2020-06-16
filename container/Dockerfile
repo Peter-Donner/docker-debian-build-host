@@ -100,6 +100,9 @@ RUN add-apt-repository \
 RUN apt-get update
 RUN apt-get -y install docker-ce docker-ce-cli containerd.io
 
+ADD fonts/sourcecodepro /usr/share/fonts/truetype/sourcecodepro
+RUN fc-cache
+
 ADD zshrc /etc/zsh/zshrc
 
 ADD startup.sh /root/startup.sh
