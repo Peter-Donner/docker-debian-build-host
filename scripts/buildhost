@@ -3,14 +3,15 @@
 docker run --privileged \
        --rm \
        -P=true \
-       -p 3000:3000 \
-       -p 3449:3449 \
-       -p 5432:5432 \
-       -p 7000:7000 \
-       -p 7002:7002 \
-       -p 8000:8000 \
-       -p 8080:8080 \
-       -p 10555:10555 \
+       -p 127.0.0.1:3449:3449 \
+       -p 127.0.0.1:3000:3000 \
+       -p 127.0.0.1:3308:3308 \
+       -p 127.0.0.1:5432:5432 \
+       -p 127.0.0.1:7000:7000 \
+       -p 127.0.0.1:7002:7002 \
+       -p 127.0.0.1:8000:8000 \
+       -p 127.0.0.1:8080:8080 \
+       -p 127.0.0.1:10555:10555 \
        -e HOST_GID=`id -g` \
        -e HOST_UID=`id -u` \
        -e HOST_USER=$USER \
@@ -26,4 +27,6 @@ docker run --privileged \
        -v /tmp/.X11-unix:/tmp/.X11-unix \
        -v /var/run/docker.sock:/var/run/docker.sock \
        -e DISPLAY=:0 \
+       --name buildhost \
+       --network buildhost \
        -it buildhost sh /root/startup.sh

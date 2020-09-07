@@ -54,11 +54,16 @@ RUN apt-get -y install php-mysql
 RUN apt-get -y install libusb-dev
 RUN apt-get -y install sassc
 RUN apt-get -y install chromium
+RUN apt-get -y install rustc
+RUN apt-get -y install mariadb-client
 
 # Docker
 RUN apt-get -y install apt-transport-https
 RUN apt-get -y install gnupg-agent
 RUN apt-get -y install software-properties-common
+
+# Google Chrome
+RUN apt-get install libdbusmenu-glib4 libdbusmenu-gtk3-4 libindicator3-7 libappindicator3-1
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -92,6 +97,8 @@ RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/b
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git
 RUN mv oh-my-zsh /usr/local/share
 
+RUN npm i tern -g
+
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 RUN add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/debian \
@@ -100,8 +107,21 @@ RUN add-apt-repository \
 RUN apt-get update
 RUN apt-get -y install docker-ce docker-ce-cli containerd.io
 
+RUN curl -L "https://github.com/docker/compose/releases/download/1.26.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+RUN chmod 755 /usr/local/bin/docker-compose
+RUN chgrp docker /usr/local/bin/docker-compose
+
 ADD fonts/sourcecodepro /usr/share/fonts/truetype/sourcecodepro
 RUN fc-cache
+
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome-stable_current_amd64.deb
+
+RUN apt-get -y install firefox-esr
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN unzip awscliv2.zip
+RUN ./aws/install
 
 ADD zshrc /etc/zsh/zshrc
 
