@@ -123,6 +123,10 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN unzip awscliv2.zip
 RUN ./aws/install
 
+RUN npm install --global @angular/cli@next
+
+RUN ln -sf /usr/share/zoneinfo/Europe/Vienna /etc/localtime
+
 ADD zshrc /etc/zsh/zshrc
 
 ADD startup.sh /root/startup.sh
