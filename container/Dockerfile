@@ -125,6 +125,8 @@ RUN ./aws/install
 
 RUN npm install --global @angular/cli@next
 
+RUN apt-get -y install git-flow
+
 RUN ln -sf /usr/share/zoneinfo/Europe/Vienna /etc/localtime
 
 ADD zshrc /etc/zsh/zshrc
