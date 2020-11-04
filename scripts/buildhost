@@ -1,20 +1,16 @@
 #!/bin/sh
 
+mkdir -p ~/.jdks
+mkdir -p ~/.config/JetBrains
+mkdir -p ~/.cache
+mkdir -p ~/.gradle
+mkdir -p ~/.java
+mkdir -p ~/.boot
+mkdir -p ~/.m2
+
 docker run --privileged \
        --rm \
        -P=true \
-       -p 127.0.0.1:3449:3449 \
-       -p 127.0.0.1:3000:3000 \
-       -p 127.0.0.1:3308:3308 \
-       -p 127.0.0.1:4200:4200 \
-       -p 127.0.0.1:5432:5432 \
-       -p 127.0.0.1:7000:7000 \
-       -p 127.0.0.1:7002:7002 \
-       -p 127.0.0.1:8000:8000 \
-       -p 127.0.0.1:8080:8080 \
-       -p 127.0.0.1:10090:10090 \
-       -p 127.0.0.1:10091:10091 \
-       -p 127.0.0.1:10555:10555 \
        -e HOST_GID=`id -g` \
        -e HOST_UID=`id -u` \
        -e HOST_USER=$USER \
@@ -22,6 +18,10 @@ docker run --privileged \
        -v /home/$USER/.ssh:/home/$USER/.ssh \
        -v /home/$USER/.jdks:/home/$USER/.jdks \
        -v /home/$USER/.config/JetBrains:/home/$USER/.config/JetBrains \
+       -v /home/$USER/.cache:/home/$USER/.cache \
+       -v /home/$USER/.gradle:/home/$USER/.gradle \
+       -v /home/$USER/.java:/home/$USER/.java \
+       -v /home/$USER/.local:/home/$USER/.local \
        -v /home/$USER/src:/home/$USER/src \
        -v /home/$USER/org:/home/$USER/org \
        -v /home/$USER/.gitconfig:/home/$USER/.gitconfig \
@@ -33,5 +33,5 @@ docker run --privileged \
        -v /var/run/docker.sock:/var/run/docker.sock \
        -e DISPLAY=:0 \
        --name buildhost \
-       --network buildhost \
+       --network host \
        -it buildhost sh /root/startup.sh

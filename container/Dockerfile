@@ -11,7 +11,7 @@ MAINTAINER Peter Donner <peter@markup.at>
 ENV LEIN_ROOT=t
 ENV LEIN_SNAPSHOTS_IN_RELEASE=t
 ENV MAVEN_HOME=/apache-maven-3.6.3
-ENV ANT_HOME=/apache-ant-1.10.8
+ENV ANT_HOME=/apache-ant-1.10.9
 
 ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 
@@ -88,9 +88,9 @@ RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven
    tar -xzf apache-maven-3.6.3-bin.tar.gz && \
    rm apache-maven-3.6.3-bin.tar.gz
 
-RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.8-bin.tar.gz && \
-    tar -xzf apache-ant-1.10.8-bin.tar.gz && \
-    rm apache-ant-1.10.8-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.9-bin.tar.gz && \
+    tar -xzf apache-ant-1.10.9-bin.tar.gz && \
+    rm apache-ant-1.10.9-bin.tar.gz
 
 RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
 
@@ -126,8 +126,14 @@ RUN ./aws/install
 RUN npm install --global @angular/cli@next
 
 RUN apt-get -y install git-flow
+RUN apt-get -y install android-tools-adb
+
+# Dependencies for embedded MySQL
+RUN apt-get -y install libaio1
+RUN apt-get -y install libncurses5
 
 RUN ln -sf /usr/share/zoneinfo/Europe/Vienna /etc/localtime
+RUN echo Europe/Vienna > /etc/timezone
 
 ADD zshrc /etc/zsh/zshrc
 
