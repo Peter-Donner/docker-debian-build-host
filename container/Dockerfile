@@ -5,13 +5,13 @@
 # Build Tools/Package Managers: Maven, Ant, Leiningen, Node Package Manager
 # Tools: MongoDB, Emacs, Git
 
-FROM debian:buster
+FROM debian:bullseye
 MAINTAINER Peter Donner <peter@markup.at>
 
 ENV LEIN_ROOT=t
 ENV LEIN_SNAPSHOTS_IN_RELEASE=t
-ENV MAVEN_HOME=/apache-maven-3.8.4
-ENV ANT_HOME=/apache-ant-1.10.11
+ENV MAVEN_HOME=/apache-maven-3.8.5
+ENV ANT_HOME=/apache-ant-1.10.12
 ENV RUSTUP_HOME=/rust
 ENV CARGO_HOME=/cargo
 
@@ -34,7 +34,7 @@ RUN apt-get -y install nvi
 RUN apt-get -y install net-tools
 RUN apt-get -y install build-essential
 RUN apt-get -y install emacs-gtk
-RUN apt-get -y install linux-kernel-headers
+#RUN apt-get -y install linux-headers
 RUN apt-get -y install rlwrap
 RUN apt-get -y install zsh
 RUN apt-get -y install ca-certificates
@@ -65,7 +65,7 @@ RUN apt-get -y install gnupg-agent
 RUN apt-get -y install software-properties-common
 
 # Google Chrome
-RUN apt-get install libdbusmenu-glib4 libdbusmenu-gtk3-4 libindicator3-7 libappindicator3-1
+# RUN apt-get install libdbusmenu-glib4 libdbusmenu-gtk3-4 libindicator3-7 libappindicator3-1
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -86,13 +86,13 @@ RUN curl -O https://download.clojure.org/install/linux-install-1.11.1.1113.sh
 RUN chmod +x linux-install-1.11.1.1113.sh
 RUN bash ./linux-install-1.11.1.1113.sh
 
-RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz && \
-   tar -xzf apache-maven-3.8.4-bin.tar.gz && \
-   rm apache-maven-3.8.4-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz && \
+   tar -xzf apache-maven-3.8.5-bin.tar.gz && \
+   rm apache-maven-3.8.5-bin.tar.gz
 
-RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.11-bin.tar.gz && \
-    tar -xzf apache-ant-1.10.11-bin.tar.gz && \
-    rm apache-ant-1.10.11-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.12-bin.tar.gz && \
+    tar -xzf apache-ant-1.10.12-bin.tar.gz && \
+    rm apache-ant-1.10.12-bin.tar.gz
 
 RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
 
@@ -116,8 +116,8 @@ RUN chgrp docker /usr/local/bin/docker-compose
 ADD fonts/sourcecodepro /usr/share/fonts/truetype/sourcecodepro
 RUN fc-cache
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN dpkg -i google-chrome-stable_current_amd64.deb
+# RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+# RUN dpkg -i google-chrome-stable_current_amd64.deb
 
 RUN apt-get -y install firefox-esr
 
