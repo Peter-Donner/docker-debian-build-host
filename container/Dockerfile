@@ -10,10 +10,12 @@ MAINTAINER Peter Donner <peter@markup.at>
 
 ENV LEIN_ROOT=t
 ENV LEIN_SNAPSHOTS_IN_RELEASE=t
-ENV MAVEN_HOME=/apache-maven-3.6.3
-ENV ANT_HOME=/apache-ant-1.10.9
+ENV MAVEN_HOME=/apache-maven-3.8.4
+ENV ANT_HOME=/apache-ant-1.10.11
+ENV RUSTUP_HOME=/rust
+ENV CARGO_HOME=/cargo
 
-ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
+ENV PATH=$MAVEN_HOME/bin:$ANT_HOME/bin:$RUSTUP_HOME/bin:$CARGO_HOME/bin:$PATH
 
 RUN apt-get update
 
@@ -54,8 +56,8 @@ RUN apt-get -y install php-mysql
 RUN apt-get -y install libusb-dev
 RUN apt-get -y install sassc
 RUN apt-get -y install chromium
-RUN apt-get -y install rustc
 RUN apt-get -y install mariadb-client
+RUN apt-get -y install keepassxc
 
 # Docker
 RUN apt-get -y install apt-transport-https
@@ -80,17 +82,17 @@ RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
     mv lein /usr/local/bin && \
     /usr/local/bin/lein
 
-RUN curl -O https://download.clojure.org/install/linux-install-1.10.1.536.sh
-RUN chmod +x linux-install-1.10.1.536.sh
-RUN bash ./linux-install-1.10.1.536.sh
+RUN curl -O https://download.clojure.org/install/linux-install-1.11.1.1113.sh
+RUN chmod +x linux-install-1.11.1.1113.sh
+RUN bash ./linux-install-1.11.1.1113.sh
 
-RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz && \
-   tar -xzf apache-maven-3.6.3-bin.tar.gz && \
-   rm apache-maven-3.6.3-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz && \
+   tar -xzf apache-maven-3.8.4-bin.tar.gz && \
+   rm apache-maven-3.8.4-bin.tar.gz
 
-RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.9-bin.tar.gz && \
-    tar -xzf apache-ant-1.10.9-bin.tar.gz && \
-    rm apache-ant-1.10.9-bin.tar.gz
+RUN wget http://www-eu.apache.org/dist/ant/binaries/apache-ant-1.10.11-bin.tar.gz && \
+    tar -xzf apache-ant-1.10.11-bin.tar.gz && \
+    rm apache-ant-1.10.11-bin.tar.gz
 
 RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
 
@@ -119,6 +121,10 @@ RUN dpkg -i google-chrome-stable_current_amd64.deb
 
 RUN apt-get -y install firefox-esr
 
+RUN echo "(curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly --no-modify-path) && rustup default nightly" > /install-rust.sh && chmod 755 /install-rust.sh
+
+RUN /install-rust.sh
+
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 RUN unzip awscliv2.zip
 RUN ./aws/install
@@ -131,6 +137,15 @@ RUN apt-get -y install android-tools-adb
 # Dependencies for embedded MySQL
 RUN apt-get -y install libaio1
 RUN apt-get -y install libncurses5
+
+RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+RUN apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+RUN apt-get update && apt-get -y install terraform
+
+RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ buster main" | tee /etc/apt/sources.list.d/azure-cli.list
+RUN apt-get update
+RUN apt-get install -y azure-cli
 
 RUN ln -sf /usr/share/zoneinfo/Europe/Vienna /etc/localtime
 RUN echo Europe/Vienna > /etc/timezone

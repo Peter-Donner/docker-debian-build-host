@@ -1,12 +1,17 @@
 #!/bin/sh
 
+mkdir -p ~/.aws
 mkdir -p ~/.jdks
 mkdir -p ~/.config/JetBrains
+mkdir -p ~/.config/Google
 mkdir -p ~/.cache
 mkdir -p ~/.gradle
 mkdir -p ~/.java
 mkdir -p ~/.boot
 mkdir -p ~/.m2
+mkdir -p ~/.rustup
+mkdir -p ~/.android
+mkdir -p ~/Android
 
 docker run --privileged \
        --rm \
@@ -15,20 +20,26 @@ docker run --privileged \
        -e HOST_UID=`id -u` \
        -e HOST_USER=$USER \
        -e HOST_DOCKER_GID=`getent group docker | awk -F: '{printf "%d", $3}'` \
-       -v /home/$USER/.ssh:/home/$USER/.ssh \
-       -v /home/$USER/.jdks:/home/$USER/.jdks \
-       -v /home/$USER/.config/JetBrains:/home/$USER/.config/JetBrains \
-       -v /home/$USER/.cache:/home/$USER/.cache \
-       -v /home/$USER/.gradle:/home/$USER/.gradle \
-       -v /home/$USER/.java:/home/$USER/.java \
-       -v /home/$USER/.local:/home/$USER/.local \
+       -v /home/$USER/src/dotfiles/.aws:/home/$USER/.aws \
+       -v /home/$USER/src/dotfiles/.ssh:/home/$USER/.ssh \
+       -v /home/$USER/src/dotfiles/.jdks:/home/$USER/.jdks \
+       -v /home/$USER/src/dotfiles/.config/JetBrains:/home/$USER/.config/JetBrains \
+       -v /home/$USER/src/dotfiles/.config/Google:/home/$USER/.config/Google \
+       -v /home/$USER/src/dotfiles/.cache:/home/$USER/.cache \
+       -v /home/$USER/src/dotfiles/.gradle:/home/$USER/.gradle \
+       -v /home/$USER/src/dotfiles/.java:/home/$USER/.java \
+       -v /home/$USER/src/dotfiles/.local:/home/$USER/.local \
+       -v /home/$USER/src/dotfiles/.vscode:/home/$USER/.vscode \
        -v /home/$USER/src:/home/$USER/src \
        -v /home/$USER/org:/home/$USER/org \
-       -v /home/$USER/.gitconfig:/home/$USER/.gitconfig \
-       -v /home/$USER/.boot:/home/$USER/.boot \
-       -v /home/$USER/.m2:/home/$USER/.m2 \
-       -v /home/$USER/.emacs.d:/home/$USER/.emacs.d \
-       -v /home/$USER/.spacemacs:/home/$USER/.spacemacs \
+       -v /home/$USER/src/dotfiles/.gitconfig:/home/$USER/.gitconfig \
+       -v /home/$USER/src/dotfiles/.boot:/home/$USER/.boot \
+       -v /home/$USER/src/dotfiles/.m2:/home/$USER/.m2 \
+       -v /home/$USER/src/dotfiles/.rustup:/home/$USER/.rustup \
+       -v /home/$USER/src/dotfiles/.android:/home/$USER/.android \
+       -v /home/$USER/src/dotfiles/Android:/home/$USER/Android \
+       -v /home/$USER/src/dotfiles/.emacs.d:/home/$USER/.emacs.d \
+       -v /home/$USER/src/dotfiles/.spacemacs:/home/$USER/.spacemacs \
        -v /tmp/.X11-unix:/tmp/.X11-unix \
        -v /var/run/docker.sock:/var/run/docker.sock \
        -e DISPLAY=:0 \
